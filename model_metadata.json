@@ -1,0 +1,34 @@
+{
+  "T1": {
+    "target": "Renewable electricity output (% of total electricity output)",
+    "features": [
+      "Year",
+      "Electricity production from hydroelectric sources (% of total)",
+      "Electricity production from renewable sources, excluding hydroelectric (% of total)",
+      "Fossil fuel energy consumption (% of total)",
+      "Electricity production from coal sources (% of total)",
+      "Electricity production from natural gas sources (% of total)",
+      "Electricity production from nuclear sources (% of total)",
+      "Energy imports, net (% of energy use)",
+      "Total natural resources rents (% of GDP)"
+    ],
+    "loo_r2": 0.9835949797803987,
+    "train_years": "1990\u20132021"
+  },
+  "T2": {
+    "target": "Energy intensity level of primary energy (MJ/$2021 PPP GDP)",
+    "features": [
+      "Year",
+      "GDP per unit of energy use (constant 2021 PPP $ per kg of oil equivalent)",
+      "Energy use (kg of oil equivalent per capita)",
+      "Fossil fuel energy consumption (% of total)",
+      "Electric power consumption (kWh per capita)",
+      "Electricity production from coal sources (% of total)",
+      "Renewable energy consumption (% of total final energy consumption)",
+      "Energy imports, net (% of energy use)",
+      "Electric power transmission and distribution losses (% of output)"
+    ],
+    "loo_r2": 0.9392237116088917,
+    "train_years": "2000\u20132021"
+  }
+}
