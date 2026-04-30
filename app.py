@@ -223,16 +223,16 @@ else:
 
     d1, d2, d3 = st.columns(3)
     with d1:
-      gdp_eu = st.slider("GDP per energy unit (PPP $/kg oil eq.)", 3.0, 15.0, 8.5, 0.1, key="gdp_eu")
-       energy_u = st.slider("Energy use (kg oil eq./capita)", 300.0, 800.0, 490.0, 5.0, key="energy_u")
+     gdp_eu = st.slider("GDP per energy unit (PPP $/kg oil eq.)", 3.0, 15.0, 8.5, 0.1, key="gdp_eu")
+     energy_u = st.slider("Energy use (kg oil eq./capita)", 300.0, 800.0, 490.0, 5.0, key="energy_u")
     with d2:
-       fossil_e = st.slider("Fossil fuel consumption (%)", 40.0, 90.0, 62.0, 0.5, key="fossil_e")
-       elec_c = st.slider("Electric power consumption (kWh/capita)", 200.0, 700.0, 470.0, 5.0, key="elec_c")
+     fossil_e = st.slider("Fossil fuel consumption (%)", 40.0, 90.0, 62.0, 0.5, key="fossil_e")
+     elec_c = st.slider("Electric power consumption (kWh/capita)", 200.0, 700.0, 470.0, 5.0, key="elec_c")
 
     with d3:
-       coal_e = st.slider("Coal electricity prod. (%)", 0.0, 40.0, 20.0, 0.5, key="coal_e")
+      coal_e = st.slider("Coal electricity prod. (%)", 0.0, 40.0, 20.0, 0.5, key="coal_e")
       renew_c = st.slider("Renewable energy consumption (%)", 15.0, 55.0, 42.0, 0.5, key="renew_c")
-       imports_e = st.slider("Net energy imports (%)", 0.0, 35.0, 15.0, 0.5, key="imports_e")
+      imports_e = st.slider("Net energy imports (%)", 0.0, 35.0, 15.0, 0.5, key="imports_e")
       tnd_loss = st.slider("T&D losses (%)", 10.0, 30.0, 18.0, 0.5, key="tnd_loss")
     inp_e = {
         "Year": target_year,
