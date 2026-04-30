@@ -146,7 +146,7 @@ if mode == "🤖 Auto-Forecast (trend-based)":
 # ══════════════════════════════════════════════════════════════════════════
 #  MANUAL / SCENARIO MODE
 # ══════════════════════════════════════════════════════════════════════════
-eelse:
+else:
     st.subheader("🎛️ Manual Scenario Prediction")
     st.info("Set each indicator manually to run a custom scenario. "
             "Leave sliders at their default (median) values for a baseline prediction.")
