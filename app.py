@@ -179,21 +179,6 @@ else:
         "Total natural resources rents (% of GDP)": rents_r,
     }
     pred_r = predict(pipe_r, inp_r)
-  
-    st.markdown("---")
-    st.subheader(f"📊 Predictions for Year {target_year}")
-    m1, m2 = st.columns(2)
-    m1.metric(
-        "🌱 Renewable Electricity Output",
-        f"{pred_r:.2f} %",
-        help="% of total electricity generated from renewables (hydro + solar + wind + other)"
-    )
-    m2.metric(
-        "⚡ Energy Intensity",
-        f"{pred_e:.3f} MJ/$2021 PPP GDP",
-        help="Primary energy consumed per unit of GDP. Lower = more efficient economy."
-    )
-
 
     st.markdown("---")
     st.markdown("#### Target (b): Energy Intensity")
@@ -223,7 +208,20 @@ else:
     }
     pred_e = predict(pipe_e, inp_e)
 
-  
+    st.markdown("---")
+    st.subheader(f"📊 Predictions for Year {target_year}")
+    m1, m2 = st.columns(2)
+    m1.metric(
+        "🌱 Renewable Electricity Output",
+        f"{pred_r:.2f} %",
+        help="% of total electricity generated from renewables (hydro + solar + wind + other)"
+    )
+    m2.metric(
+        "⚡ Energy Intensity",
+        f"{pred_e:.3f} MJ/$2021 PPP GDP",
+        help="Primary energy consumed per unit of GDP. Lower = more efficient economy."
+    )
+
     # Context gauges
     st.markdown("#### How do these compare to historical range?")
     g1, g2 = st.columns(2)
