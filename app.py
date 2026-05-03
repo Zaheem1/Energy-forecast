@@ -183,104 +183,111 @@ else:
 
     pred_r = predict(pipe_r, inp_r)
 
-    # ================= OUTPUT (MIDDLE) =================
-    st.markdown("---")
-    st.subheader(f"📊 Predictions for Year {target_year}")
+# ================= OUTPUT (MIDDLE) =================
+st.markdown("---")
+st.subheader(f"📊 Predictions for Year {target_year}")
 
-    m1, m2 = st.columns(2)
+m1, m2 = st.columns(2)
 
-    with m1:
-        st.markdown(f"""
-        <div style="
-            background-color:#f8f9fa;
-            padding:20px;
-            border-radius:12px;
-            text-align:center;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-        ">
-            <h4>🌱 Renewable Electricity Output</h4>
-            <h2 style="color:#1565C0;">{pred_r:.2f}%</h2>
-        </div>
-        """, unsafe_allow_html=True)
+# LEFT CARD (Renewable)
+with m1:
+    st.markdown(f"""
+    <div style="
+        background-color:#f8f9fa;
+        padding:20px;
+        border-radius:12px;
+        text-align:center;
+        box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    ">
+        <h4>🌱 Renewable Electricity Output</h4>
+        <h2 style="color:#1565C0;">{pred_r:.2f}%</h2>
+    </div>
+    """, unsafe_allow_html=True)
 
-    with m2:
-        st.markdown("""
-        <div style="
-            background-color:#f8f9fa;
-            padding:20px;
-            border-radius:12px;
-            text-align:center;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-        ">
-            <h4>⚡ Energy Intensity</h4>
-            <p style="margin-top:20px;">Adjust inputs below to calculate</p>
-        </div>
-        """, unsafe_allow_html=True)
+# RIGHT CARD PLACEHOLDER (IMPORTANT FIX)
+m2_placeholder = m2.empty()
 
-    # ================= TARGET (b) =================
-    st.markdown("---")
-    st.markdown("#### Target (b): Energy Intensity")
+m2_placeholder.markdown("""
+<div style="
+    background-color:#f8f9fa;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+">
+    <h4>⚡ Energy Intensity</h4>
+    <p style="margin-top:20px;">Adjust inputs below to calculate</p>
+</div>
+""", unsafe_allow_html=True)
 
-    d1, d2, d3 = st.columns(3)
-    with d1:
-     gdp_eu = st.slider("GDP per energy unit (PPP $/kg oil eq.)", 3.0, 15.0, 8.5, 0.1, key="gdp_eu")
-     energy_u = st.slider("Energy use (kg oil eq./capita)", 300.0, 800.0, 490.0, 5.0, key="energy_u")
-    with d2:
-     fossil_e = st.slider("Fossil fuel consumption (%)", 40.0, 90.0, 62.0, 0.5, key="fossil_e")
-     elec_c = st.slider("Electric power consumption (kWh/capita)", 200.0, 700.0, 470.0, 5.0, key="elec_c")
 
-    with d3:
-      coal_e = st.slider("Coal electricity prod. (%)", 0.0, 40.0, 20.0, 0.5, key="coal_e")
-      renew_c = st.slider("Renewable energy consumption (%)", 15.0, 55.0, 42.0, 0.5, key="renew_c")
-      imports_e = st.slider("Net energy imports (%)", 0.0, 35.0, 15.0, 0.5, key="imports_e")
-      tnd_loss = st.slider("T&D losses (%)", 10.0, 30.0, 18.0, 0.5, key="tnd_loss")
-    inp_e = {
-        "Year": target_year,
-        "GDP per unit of energy use (constant 2021 PPP $ per kg of oil equivalent)": gdp_eu,
-        "Energy use (kg of oil equivalent per capita)": energy_u,
-        "Fossil fuel energy consumption (% of total)": fossil_e,
-        "Electric power consumption (kWh per capita)": elec_c,
-        "Electricity production from coal sources (% of total)": coal_e,
-        "Renewable energy consumption (% of total final energy consumption)": renew_c,
-        "Energy imports, net (% of energy use)": imports_e,
-        "Electric power transmission and distribution losses (% of output)": tnd_loss,
-    }
+# ================= TARGET (b) =================
+st.markdown("---")
+st.markdown("#### Target (b): Energy Intensity")
 
-    pred_e = predict(pipe_e, inp_e)
+d1, d2, d3 = st.columns(3)
 
-    # ===== UPDATE SECOND CARD =====
-    with m2:
-        st.markdown(f"""
-        <div style="
-            background-color:#f8f9fa;
-            padding:20px;
-            border-radius:12px;
-            text-align:center;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-        ">
-            <h4>⚡ Energy Intensity</h4>
-            <h2 style="color:#2E7D32;">{pred_e:.3f} MJ/$2021 PPP GDP</h2>
-        </div>
-        """, unsafe_allow_html=True)
+with d1:
+    gdp_eu = st.slider("GDP per energy unit (PPP $/kg oil eq.)", 3.0, 15.0, 8.5, 0.1, key="gdp_eu")
+    energy_u = st.slider("Energy use (kg oil eq./capita)", 300.0, 800.0, 490.0, 5.0, key="energy_u")
 
-    # ================= COMPARISON =================
-    st.markdown("#### How do these compare to historical range?")
+with d2:
+    fossil_e = st.slider("Fossil fuel consumption (%)", 40.0, 90.0, 62.0, 0.5, key="fossil_e")
+    elec_c = st.slider("Electric power consumption (kWh/capita)", 200.0, 700.0, 470.0, 5.0, key="elec_c")
 
-    g1, g2 = st.columns(2)
+with d3:
+    coal_e = st.slider("Coal electricity prod. (%)", 0.0, 40.0, 20.0, 0.5, key="coal_e")
+    renew_c = st.slider("Renewable energy consumption (%)", 15.0, 55.0, 42.0, 0.5, key="renew_c")
+    imports_e = st.slider("Net energy imports (%)", 0.0, 35.0, 15.0, 0.5, key="imports_e")
+    tnd_loss = st.slider("T&D losses (%)", 10.0, 30.0, 18.0, 0.5, key="tnd_loss")
 
-    hist_min_r, hist_max_r = min(pipe_r["historical_values"]), max(pipe_r["historical_values"])
-    hist_min_e, hist_max_e = min(pipe_e["historical_values"]), max(pipe_e["historical_values"])
+inp_e = {
+    "Year": target_year,
+    "GDP per unit of energy use (constant 2021 PPP $ per kg of oil equivalent)": gdp_eu,
+    "Energy use (kg of oil equivalent per capita)": energy_u,
+    "Fossil fuel energy consumption (% of total)": fossil_e,
+    "Electric power consumption (kWh per capita)": elec_c,
+    "Electricity production from coal sources (% of total)": coal_e,
+    "Renewable energy consumption (% of total final energy consumption)": renew_c,
+    "Energy imports, net (% of energy use)": imports_e,
+    "Electric power transmission and distribution losses (% of output)": tnd_loss,
+}
 
-    with g1:
-        pct_r = (pred_r - hist_min_r) / (hist_max_r - hist_min_r) * 100
-        st.progress(min(max(int(pct_r), 0), 100))
-        st.caption(f"Renewable: {hist_min_r:.1f}% – {hist_max_r:.1f}% | Pred: {pred_r:.2f}%")
+pred_e = predict(pipe_e, inp_e)
 
-    with g2:
-        pct_e = (pred_e - hist_min_e) / (hist_max_e - hist_min_e) * 100
-        st.progress(min(max(int(pct_e), 0), 100))
-        st.caption(f"Energy Intensity: {hist_min_e:.2f} – {hist_max_e:.2f} | Pred: {pred_e:.3f}")
 
+# ================= UPDATE CARD (NO DUPLICATE) =================
+m2_placeholder.markdown(f"""
+<div style="
+    background-color:#f8f9fa;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+">
+    <h4>⚡ Energy Intensity</h4>
+    <h2 style="color:#2E7D32;">{pred_e:.3f} MJ/$2021 PPP GDP</h2>
+</div>
+""", unsafe_allow_html=True)
+
+
+# ================= COMPARISON =================
+st.markdown("#### How do these compare to historical range?")
+
+g1, g2 = st.columns(2)
+
+hist_min_r, hist_max_r = min(pipe_r["historical_values"]), max(pipe_r["historical_values"])
+hist_min_e, hist_max_e = min(pipe_e["historical_values"]), max(pipe_e["historical_values"])
+
+with g1:
+    pct_r = (pred_r - hist_min_r) / (hist_max_r - hist_min_r) * 100
+    st.progress(min(max(int(pct_r), 0), 100))
+    st.caption(f"Renewable: {hist_min_r:.1f}% – {hist_max_r:.1f}% | Pred: {pred_r:.2f}%")
+
+with g2:
+    pct_e = (pred_e - hist_min_e) / (hist_max_e - hist_min_e) * 100
+    st.progress(min(max(int(pct_e), 0), 100))
+    st.caption(f"Energy Intensity: {hist_min_e:.2f} – {hist_max_e:.2f} | Pred: {pred_e:.3f}")
 # ── Footer ─────────────────────────────────────────────────────────────────
 st.markdown("---")
 st.caption(
